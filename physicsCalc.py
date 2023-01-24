@@ -8,9 +8,10 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "3.5.0" 
+version = "4.2.2" 
 g = 9.81
 pi = 3.14159265359
+displayStatus = True
 def csc(theta):
     return 1/math.sin(theta)
 def cot(theta):
@@ -25,9 +26,29 @@ def isfloat(num):
         return False
     
 
-def console(): 
+def console():
     
-    
+    global displayStatus
+    o = 0
+    i = o
+    def statusFail():
+        global displayStatus
+        if (displayStatus == True):
+            print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+    def statusSuccess():
+        global displayStatus
+        if displayStatus == True:
+            print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+    def setStatus():
+        global displayStatus
+        status = input("Display Indvidual Calculation Status? (y/n): ")
+        if status.upper() == "Y": 
+            return True
+        elif status.upper() == "N":
+            return False
+        else:
+            print("ERROR: INVALID INPUT")
+            setStatus()
     print("/help for help")
     cmd = input("Enter Command: ")
     
@@ -44,23 +65,23 @@ def console():
             o +=1
             try:
                 f = float(m)*float(a)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 m = float(f)/float(a)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 a = float(f)/float(m)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o = 0
             print(f"""
@@ -97,30 +118,30 @@ def console():
                 o +=1
                 try:
                    xf = float(xi) + float(vxi)*float(t)
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    xi = float(xf) - float(vxi)*float(t)
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    vxi = (float(xf)/float(t)) - (float(xi)/float(t))
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    t = (float(xf)/float(vxi)) - (float(xi)/float(vxi))
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o = 0
                 print(f"""
@@ -145,30 +166,30 @@ def console():
                 o +=1
                 try:
                    yf = float(yi) + float(vyi)*float(t)+ g*pow(float(t), 2)
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    yi = float(yf) - float(vyi)*float(t)+ g*pow(float(t), 2)
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    vyi = float(yf)/float(t) + float(yi)/float(t)+ g*t
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    t = (float(vyi)+math.sqrt(pow(float(vyi), 2)+4*g*float(yi) - 4*g*float(yf)))/g*2
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o = 0
                 print(f"""
@@ -198,81 +219,81 @@ def console():
               o +=1
               try:
                  xf = float(xi)+(float(vi)*math.cos(math.radians(float(a))))*float(t)
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  xi = float(xf)-(float(vi)*math.cos(math.radians(float(a))))*float(t)
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  vi = ((float(xf)*sec(math.radians(float(a))))/float(t))-((float(xi)*sec(math.radians(float(a))))/float(t))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  a = math.degrees(math.acos(((float(xf))/(float(vi)*float(t)))-((float(xi))/(float(vi)*float(t)))))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o += 1
               #############
               try:
                  yf = float(yi) + (float(vi)*math.sin(math.degrees(float(a))))*t - 0.5*g*math.pow(float(t), 2)
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  yi = float(yf) - float(vi)*float(t)*math.sin(float(a)) + ((math.pow(float(t), 2)*g)/(2))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  a = math.degrees((math.asin(math.radians(((float(yf))/(float(vi)*float(t)))-((float(yi))/(float(vi)*float(t)))+((g*float(t))/(2*float(vi)))))))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               ################
               try:
                  vxf = float(vi)*math.cos(math.radians(float(a)))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  vi = float(vxf)*sec(math.radians(float(a)))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  a = math.degrees(math.acos((float(vxf))/(float(vi))))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o +=1
               try:
                  a = math.degrees((math.asin(math.radians(((float(vyf))/(float(vi)))+((g*float(t))/(float(vi)))))))
-                 print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                 statusSuccess()
               except:
-                 print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                 statusFail()
                  pass
               o = 0
               print(f"""
@@ -302,23 +323,23 @@ def console():
                 o +=1
                 try:
                    pRange = ((math.pow(float(vi), 2))/(g))*math.sin((math.radians(2*float(a))))
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    vi = math.sqrt(float(pRange)*math.sin(math.radians(2*float(a))))*(csc(math.radians(2*float(a))))
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o +=1
                 try:
                    a = math.degrees((math.asin(((float(pRange)*g)/(math.pow(float(vi), 2)))))/2)
-                   print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                   statusSuccess()
                 except:
-                   print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                   statusFail()
                    pass
                 o = 0
                 print(f"""
@@ -356,6 +377,7 @@ def console():
                   /mechNRG - total mechanical energy equations
                   /power - power equations
                   
+                  /status - display operation success readout
                   /faq - displays frequently ask questions
                   /changelog - displays the changelog
                   /quit - exit the program
@@ -382,123 +404,123 @@ def console():
             o +=1
             try:
                 vf = float(vi)+float(a)*float(t)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vi = float(vf)-float(a)*float(t)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 a = (float(vf)-float(vi))/float(t)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 t = (float(vf)-float(vi))/float(a)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             ### vav = 1/2(vi+vfv)
             o +=1
             try:
                 vav = 0.5*(float(vi)+float(vf))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vi = 2*float(vav)-float(vf)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vf = 2*float(vav)-float(vi)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             ### xf = xi + 1/2(vi+vf)t
             o +=1
             try:
                 xf = float(xi) + 0.5*(float(vi)+float(vf))*float(t)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 xi = float(xf) - ((float(vi)*float(t))/(2)) - ((float(vf)*float(t))/(2))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vi = (2*float(xf))/float(t) - (2*float(xi))/float(t) - float(vf)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vf = (2*float(xf))/(float(t)) - (2*float(xi))/(float(t)) - float(vi)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 t = (float(xf)-float(xi))/(0.5*(float(vi)+float(vf)))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             ### xf =  xi + vi*t+1/2a*t^2
             o +=1
             try:
                 xf = float(xi)+float(vi)*float(t)+0.5*(float(a))*math.pow(float(t), 2)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 xi = float(xf)-float(vi)*float(t)-0.5*(float(a)*math.pow(float(t), 2))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vi = float(xf)/float(t)-float(xi)/float(t)-(float(a)*float(t))/2
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
             o += 1
             try:
                 a = (2*float(xf))/(math.pow(float(t), 2))-(2*float(xi))/(math.pow(float(t), 2))-(2*float(vi))/(float(t))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 t = ((float(vi)-math.sqrt(math.pow(float(vi), 2)+(2*(float(a))*float(xf))-(2*(float(a)))*float(xi)))/float(a))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             
@@ -506,37 +528,37 @@ def console():
             
             try:
                 vf = math.sqrt(math.pow(float(vi), 2)+2*float(a)*float(xf)-2*float(a)*float(xi))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 a = (math.pow(float(vf), 2))/(2*(float(xf)-float(xi)))-(math.pow(float(vi), 2))/(2*(float(xf)-float(xi)))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 vi = math.sqrt(math.pow(float(vf), 2)-2*float(a)*float(xf)+2*float(xi)*float(a))
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 xf = (math.pow(float(vf), 2))/(2*float(a))-(math.pow(float(vi), 2))/(2*float(a))+float(xi)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o +=1
             try:
                 xi = -1*(math.pow(float(vf), 2))/(2*float(a))+(math.pow(float(vi), 2))/(2*float(a))+float(xf)
-                print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+                statusSuccess()
             except:
-                print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+                statusFail()
                 pass
             o = 0
             print(f"""
@@ -583,30 +605,30 @@ def console():
             o +=1
             try:
                w = float(f)*float(d)*math.cos(math.radians(float(a)))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                f = (float(w)*sec(math.radians(a)))/(float(d))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                d = (float(w)*sec(math.radians(a)))/(float(f))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o += 1
             try:
                a = math.degrees(math.acos((float(w))/(float(f)*float(d))))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o = 0
             print(f"""
@@ -631,23 +653,23 @@ def console():
             o +=1
             try:
                k = 0.5*float(m)*math.pow(float(v), 2)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                m = (2*float(k))/(math.pow(float(v), 2))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                v = (math.sqrt(2*float(k)*float(m)))/(float(m))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o = 0
             print(f"""
@@ -671,23 +693,23 @@ def console():
             o +=1
             try:
                p = float(m)*g*float(h)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                m = (float(p))/(g*float(h))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                h = float(p)*(1)/(float(m)*g)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o = 0
             print(f"""
@@ -717,29 +739,29 @@ def console():
             o +=1
             try:
                h1 = float(h2) + (math.pow(float(v2), 2))/(2*g) - (math.pow(float(v1), 2))/(2*g)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                h2 = float(h1) + (math.pow(float(v2), 2))/(2*g) - (math.pow(float(v1), 2))/(2*g)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             try:
                v1 = math.sqrt(2*g*float(h2)+math.pow(float(v2), 2) - 2*g*float(h1))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                v2 = math.sqrt(2*g*float(h1)-2*g*float(h2)+math.pow(float(v1), 2))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             o = 0
@@ -763,16 +785,16 @@ def console():
             o +=1
             try:
                t = 2*pi*math.sqrt(float(l)/g)
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o +=1
             try:
                l = (math.pow(float(t), 2)*g)/(4*math.pow(pi, 2))
-               print(f"attempt {i+1} opperation {o} successful, proceeding to next")
+               statusSuccess()
             except:
-               print(f"attempt {i+1} opperation {o} failed, proceeding to next")
+               statusFail()
                pass
             o = 0
             print(f"""
@@ -805,6 +827,12 @@ def console():
               3.4.1 - fixed a bug in the potential GE equations
               3.4.2 - fixed a bug in the mechnical energy equations
               3.5.0 - added power equation
+              4.0.0 - added function to enable and disable readout
+              4.1.0 - refactored readout command
+              4.2.0 - fixed bug with readout command
+              4.2.1 - added confirmation that is given to user after 
+                      readout command is executed
+              4.2.2 - more readout command bug fixes
               """)
         console()
     ##############
@@ -817,6 +845,11 @@ def console():
               
               """)
         console()
+    ##############
+    elif cmd == "/status": 
+       displayStatus = setStatus()
+       print(f"configuration set to: {displayStatus}")
+       console()
     ##############
     elif cmd == "/quit":
        sys.exit("User Terminated the Program")
