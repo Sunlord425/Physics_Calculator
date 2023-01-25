@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "4.2.2" 
+version = "4.2.3" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -105,7 +105,7 @@ def console():
         /exit - return to main console
                   """)
             projectiles()
-        elif pcmd == "noAngleX":
+        elif pcmd == "/noAngleX":
             print("please enter values below, entering \"null\" if it is not given")
             print()
             xf = input("Final Position: ")
@@ -153,7 +153,7 @@ def console():
                       """)
                 i += 1
             projectiles()
-        elif pcmd == "noAngleY":
+        elif pcmd == "/noAngleY":
             print("please enter values below, entering \"null\" if it is not given")
             print()
             yf = input("Final Position: ")
@@ -833,6 +833,7 @@ def console():
               4.2.1 - added confirmation that is given to user after 
                       readout command is executed
               4.2.2 - more readout command bug fixes
+              4.2.3 - fixed a bug with the projectile calculator 
               """)
         console()
     ##############
