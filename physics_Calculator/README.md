@@ -1,0 +1,1 @@
+This is just a little calculator that I'm making because I don't like having to do physics problem in class.
