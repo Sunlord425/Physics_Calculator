@@ -25,6 +25,11 @@ def isfloat(num):
     except ValueError:
         return False
     
+def notGate(status):
+    if status == True:
+        return False
+    if status == False:
+        return True
 
 def console():
     
@@ -33,19 +38,19 @@ def console():
     i = o
     def statusFail():
         global displayStatus
-        if (displayStatus == True):
+        if (displayStatus != True):
             print(f"attempt {i+1} opperation {o} failed, proceeding to next")
     def statusSuccess():
         global displayStatus
-        if displayStatus == True:
+        if displayStatus != True:
             print(f"attempt {i+1} opperation {o} successful, proceeding to next")
     def setStatus():
         global displayStatus
         status = input("Display Indvidual Calculation Status? (y/n): ")
         if status.upper() == "Y": 
-            return True
-        elif status.upper() == "N":
             return False
+        elif status.upper() == "N":
+            return True
         else:
             print("ERROR: INVALID INPUT")
             setStatus()
@@ -849,7 +854,7 @@ def console():
     ##############
     elif cmd == "/status": 
        displayStatus = setStatus()
-       print(f"configuration set to: {displayStatus}")
+       print(f"configuration set to: {notGate(displayStatus)}")
        console()
     ##############
     elif cmd == "/quit":
