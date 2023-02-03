@@ -809,6 +809,9 @@ def console():
                   """)
             console()
     ##############
+    elif cmd == "/momentum":
+        AxBisC("momentum", "mass", "velocity") 
+    ##############
     elif cmd == "/changelog" :
         print(""" 
               2.0.0 - added projectile calculations
