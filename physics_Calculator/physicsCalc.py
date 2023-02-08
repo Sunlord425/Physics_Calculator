@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "4.4.0" 
+version = "4.4.1" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -785,7 +785,7 @@ def console():
         print("please enter values below, entering \"null\" if it is not given")
         print()
         t = input("Period: ")
-        l = input("length:  ")
+        l = input("Length:  ")
         o = 0
         i = o
         while (i < 4) and ((isfloat(t) and isfloat(l)) == False): 
@@ -812,10 +812,10 @@ def console():
             console()
     ##############
     elif cmd == "/momentum":
-        AxBisC("momentum", "mass", "velocity")
+        AxBisC("Momentum", "Mass", "Velocity")
     ##############
     elif cmd == "/impulse":
-        AxBisC("Impulse/Change in Momentum", "force", "time,") 
+        AxBisC("Impulse/Change in Momentum", "Force", "Time,") 
     ##############
     elif cmd == "/changelog" :
         print(""" 
@@ -849,6 +849,7 @@ def console():
               4.2.3 - fixed a bug with the projectile calculator 
               4.3.0 - added momentum equations
               4.4.0 - added impulse equations
+              4.4.1 - formating
               """)
         console()
     ##############
