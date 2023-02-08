@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "4.2.3" 
+version = "4.4.0" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -381,6 +381,8 @@ def console():
                   /penPeriod - calulates period of pendulum 
                   /mechNRG - total mechanical energy equations
                   /power - power equations
+                  /momentum - momentum equations
+                  /impulse - impulse equations
                   
                   /status - display operation success readout
                   /faq - displays frequently ask questions
@@ -810,7 +812,10 @@ def console():
             console()
     ##############
     elif cmd == "/momentum":
-        AxBisC("momentum", "mass", "velocity") 
+        AxBisC("momentum", "mass", "velocity")
+    ##############
+    elif cmd == "/impulse":
+        AxBisC("Impulse/Change in Momentum", "force", "time,") 
     ##############
     elif cmd == "/changelog" :
         print(""" 
@@ -842,6 +847,8 @@ def console():
                       readout command is executed
               4.2.2 - more readout command bug fixes
               4.2.3 - fixed a bug with the projectile calculator 
+              4.3.0 - added momentum equations
+              4.4.0 - added impulse equations
               """)
         console()
     ##############
