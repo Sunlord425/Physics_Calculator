@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "4.4.1" 
+version = "4.4.2" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -815,7 +815,7 @@ def console():
         AxBisC("Momentum", "Mass", "Velocity")
     ##############
     elif cmd == "/impulse":
-        AxBisC("Impulse/Change in Momentum", "Force", "Time,") 
+        AxBisC("Impulse/Change in Momentum", "Force", "Time") 
     ##############
     elif cmd == "/changelog" :
         print(""" 
@@ -850,6 +850,7 @@ def console():
               4.3.0 - added momentum equations
               4.4.0 - added impulse equations
               4.4.1 - formating
+              4.4.2 - formating 2: electric bogaloo 
               """)
         console()
     ##############
