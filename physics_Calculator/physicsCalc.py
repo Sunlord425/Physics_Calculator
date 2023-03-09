@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "4.4.2" 
+version = "5.0.1" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -356,15 +356,376 @@ def console():
                 i += 1
             projectiles()
         
-        elif pcmd == "/exit":
+        elif ((pcmd == "/exit") or (pcmd == "/e")):
             console()
+        elif ((pcmd == "/quit") or (pcmd == "/q")):
+            sys.exit("User Terminated the Program")
         else:
             print("ERROR: INVALID COMMAND")
             projectiles()
         
             
-            
-            
+    def vectorCalc():
+        vecCmd = input("Enter Command (Vector Calc): ")
+        if vecCmd == "/help":
+            print("""
+            list of commands:
+                /comp - convert from mag/dir to compY/compX and back
+                /add - add two vectors
+                /scalar - multiply a vector by a scalar
+
+                /help - command list
+                /exit - exit vector calculator  
+                """)
+            vectorCalc()
+        elif (vecCmd == "/exit") or (vecCmd == "/e"):
+            console()
+        elif vecCmd == "/comp":
+            mag = input("Magnitude: ")
+            dir = input("Direction: ")
+            compX = input("X Component: ")
+            compY = input("Y Component: ")
+            o = 0
+            i = o
+            while (i < 10) and ((isfloat(mag) and isfloat(dir) and isfloat(compX) and isfloat(compY)) == False):
+                o +=1
+                try:
+                    compX = abs(float(mag))*(math.cos(math.radians(float(dir))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY = abs(float(mag))*(math.sin(math.radians(float(dir))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    mag = math.sqrt(math.pow(float(compX), 2)+math.pow(float(compY), 2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir = math.degrees(math.acos((float(compX))/(float(mag))))
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir = math.degrees(math.asin((float(compY))/(float(mag))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                      Magnitude = {mag}
+                      Direction = {dir}
+                      X Component = {compX}
+                      Y Component = {compY}
+                      
+                  """)
+                i += 1
+            vectorCalc()
+        elif vecCmd == "/add":
+            mag1 = input("Magnitude 1: ")
+            dir1 = input("Direction 1: ")
+            compX1 = input("X Component 1: ")
+            compY1 = input("Y Component 1: ")
+            mag2 = input("Magnitude 2: ")
+            dir2 = input("Direction 2: ")
+            compX2 = input("X Component 2: ")
+            compY2 = input("Y Component 2: ")
+            resX = input("Resultant X Component: ")
+            resY = input("Resultant Y Component: ")
+            resMag = input("Resultant Magnitude: ")
+            resDir = input("Resultant Direction: ")
+            o = 0
+            i = o
+            while (i < 20) and ((isfloat(mag1) and isfloat(dir1) and isfloat(compX1) and isfloat(compY1) and isfloat(mag2) and isfloat(dir2) and isfloat(compX2) and isfloat(compY2) and isfloat(resX) and isfloat(resY) and isfloat(resDir) and isfloat(resMag)) == False):
+                o +=1
+                try:
+                    compX1 = abs(float(mag1))*(math.cos(math.radians(float(dir1))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY1 = abs(float(mag1))*(math.sin(math.radians(float(dir1))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    mag1 = math.sqrt(math.pow(float(compX1), 2)+math.pow(float(compY1), 2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir1 = math.degrees(math.acos((float(compX1))/(float(mag1))))
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir1 = math.degrees(math.asin((float(compY1))/(float(mag1))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+
+                o += 1
+                
+                try:
+                    compX2 = abs(float(mag2))*(math.cos(math.radians(float(dir2))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY2 = abs(float(mag2))*(math.sin(math.radians(float(dir2))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    mag2 = math.sqrt(math.pow(float(compX2), 2)+math.pow(float(compY2), 2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir2 = math.degrees(math.acos((float(compX2))/(float(mag2))))
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir2 = math.degrees(math.asin((float(compY2))/(float(mag2))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+
+
+                o +=1
+                try:
+                    resX = float(compX1) + float(compX2)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    resY = float(compY1) + float(compY2)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    resMag = math.sqrt(math.pow(float(resX), 2)+math.pow(float(resY), 2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    resDir = math.degrees(math.acos((float(resX))/(float(resMag))))
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    resDir = math.degrees(math.asin((float(resY))/(float(resMag))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+
+                o +=1
+                try:
+                    compX1 = float(resX) - float(compX2)
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY1 = float(resY) - float(compY2)
+
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compX2 = float(resX) - float(compX1)
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY2 = float(resY) - float(compY1)
+
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                      Magnitude 1 = {mag1}
+                      Direction 1 = {dir1}
+                      X Component 1 = {compX1}
+                      Y Component 1 = {compY1}
+
+                      Magnitude 2 = {mag2}
+                      Direction 2 = {dir2}
+                      X Component 2 = {compX2}
+                      Y Component 2 = {compY2}
+
+                      Resultant Magnitude  = {resMag}
+                      Resultant Direction  = {resDir}
+                      Resultant X Component = {resX}
+                      Resultant Y Component = {resY}
+                      
+                  """)
+                i += 1
+            vectorCalc()
+        elif vecCmd == "/scalar":
+            mag = input("Magnitude: ")
+            dir = input("Direction: ")
+            compX = input("X Component: ")
+            compY = input("Y Component: ")
+            scal = input("Scalar: ")
+            magR = input("Resultant Magnitude: ")
+            dirR = input("Resultant Direction: ")
+            compXR = input("Resultant X Component: ")
+            compYR = input("Resultant Y Component: ")
+            o = 0
+            i = o
+            while (i < 10) and ((isfloat(mag) and isfloat(dir) and isfloat(compX) and isfloat(compY) and isfloat(magR) and isfloat(dirR) and isfloat(compXR) and isfloat(compYR) and isfloat(scal)) == False):
+                o +=1
+                try:
+                    compX = abs(float(mag))*(math.cos(math.radians(float(dir))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compY = abs(float(mag))*(math.sin(math.radians(float(dir))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    mag = math.sqrt(math.pow(float(compX), 2)+math.pow(float(compY), 2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir = math.degrees(math.acos((float(compX))/(float(mag))))
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    dir = math.degrees(math.asin((float(compY))/(float(mag))))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                
+                o +=1
+                try:
+                    dirR = float(dir)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compXR = float(compX)*float(scal)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    compYR = float(compY)*float(scal)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    magR = float(mag)*float(scal)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    magR = (float(scal)/abs(float(scal)))*(math.sqrt(math.pow(float(compXR), 2)+math.pow(float(compYR), 2)))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    scal = float(compXR)/float(compX)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    scal = float(compYR)/float(compY)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                      Magnitude = {mag}
+                      Direction = {dir}
+                      X Component = {compX}
+                      Y Component = {compY}
+                      Scalar = {scal}
+                      Resultant Magnitude = {magR}
+                      Resultant Direction = {dirR}
+                      Resultant X Component = {compXR}
+                      Resultant Y Component = {compYR}
+                  """)
+                i += 1
+            vectorCalc()
+
+        elif ((vecCmd == "/quit") or (vecCmd == "/q")):
+            sys.exit("User Terminated the Program")
+        else:
+            print("ERROR: INVALID COMMAND")
+            vectorCalc()
+
+
     ###################
     if cmd == "/help":
         print("""
@@ -375,7 +736,7 @@ def console():
                   /friction - friction equations
                   /work - work equations
                   /workAngle - work equations that involve angles
-                  /projectile - projectile equations
+                  /projectile - projectile calculator
                   /kineticE - kinetic energy equations
                   /potentialGE - gravitational potential energy equations
                   /penPeriod - calulates period of pendulum 
@@ -383,6 +744,7 @@ def console():
                   /power - power equations
                   /momentum - momentum equations
                   /impulse - impulse equations
+                  /vec - vector calculator 
                   
                   /status - display operation success readout
                   /faq - displays frequently ask questions
@@ -392,6 +754,8 @@ def console():
         console()
         
     ###################
+    elif cmd == "/vec":
+        vectorCalc()
     
     elif cmd == "/posT":
         print("please enter values below, entering \"null\" if it is not given")
@@ -850,7 +1214,9 @@ def console():
               4.3.0 - added momentum equations
               4.4.0 - added impulse equations
               4.4.1 - formating
-              4.4.2 - formating 2: electric bogaloo 
+              4.4.2 - formating 2: electric bogaloo
+              5.0.0 - added vector calculator
+              5.0.1 - vector scalar bug fixes 
               """)
         console()
     ##############
@@ -869,7 +1235,7 @@ def console():
        print(f"configuration set to: {notGate(displayStatus)}")
        console()
     ##############
-    elif cmd == "/quit":
+    elif ((cmd == "/quit") or (cmd == "/q")):
        sys.exit("User Terminated the Program")
             
     ######################################
