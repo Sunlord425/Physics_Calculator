@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "5.0.1" 
+version = "6.0.1" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
@@ -724,6 +724,204 @@ def console():
         else:
             print("ERROR: INVALID COMMAND")
             vectorCalc()
+    
+    def col():
+        print("/help for help")
+        print()
+        clCmd = input("Enter Command (Collisions): ")
+        if clCmd == "/help":
+            print("""
+                /cinc - Completely Inelastic Collision
+                /inc - Inelastic Collisions
+                /ec - Elastic Collisions
+
+                /help - Shows help
+                /exit - Return to Main Calculator
+                /quit - quits the program 
+
+                """)
+            col()
+        elif clCmd == "/cinc":
+            print("please enter values below, entering \"null\" if it is not given")
+            print()
+            m1 = input("Mass 1: ")
+            m2 = input("Mass 2: ")
+            vi = input("Inital Velocity: ")
+            vf = input("Final Velocity: ")
+            o = 0
+            i = o
+            while (i < 10) and ((isfloat(m1) and isfloat(m2) and isfloat(vi) and isfloat(vf)) == False):
+                o +=1
+                try:
+                    vf = (float(m1)*float(vi))/(float(m1)+float(m2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    vi = float(vf) + (float(vf)*float(m2))/(float(m1))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    m1 = (float(vf)*float(m2))/(float(vi)-float(vf))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                try:
+                    m2 = (float(vi)*float(m1))/(float(vf)) + float(m1)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                        Mass 1 = {m1}
+                        Mass 2 = {m1}
+                        Inital Velocity = {vi}
+                        Final Velocity = {vf} 
+                  """)
+                i += 1
+                col()
+
+        elif clCmd =="/inc":
+            print("please enter values below, entering \"null\" if it is not given")
+            print()
+            m1 = input("Mass 1: ")
+            m2 = input("Mass 2: ")
+            v1 = input("Velocity 1 : ")
+            v2 = input("Velocity 2: ")
+            vf = input("Final Velocity: ")
+            o = 0
+            i = o
+            while (i < 10) and ((isfloat(m1) and isfloat(m2) and isfloat(v1) and isfloat(v2) and isfloat(vf)) == False):
+                o +=1
+                try:
+                    vf = (float(m1)*float(v1)+float(m2)*float(v2))/(float(m1)+float(m2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    v1 = float(vf) + (float(m2)*float(vf))/(float(m1)) - (float(m2)*float(v2))/(float(m1))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    v2 = float(vf) + (float(m1)*float(vf))/(float(m2)) - (float(m1)*float(v1))/(float(m2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    m1 = (float(m2)*(float(vf)-float(v2)))/(float(v1)-float(vf))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    m2 = (float(m1)*(float(vf)-float(v2)))/(float(v1)-float(vf))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                        Mass 1 = {m1}
+                        Mass 2 = {m1}
+                        Velocity 1 = {v1}
+                        Velocity 2 = {v2}
+                        Final Velocity = {vf} 
+                  """)
+                i += 1  
+            col()
+        
+        elif clCmd == "/ec":
+            print("please enter values below, entering \"null\" if it is not given")
+            print()
+            m1 = input("Mass 1: ")
+            m2 = input("Mass 2: ")
+            v1i = input("Inital Velocity 1: ")
+            v1f = input("Final Velocity 1: ")
+            v2i = input("Inital Velocity 2: ")
+            v2f = input("Final Velocity 2: ")
+            o = 0
+            i = o
+            while (i < 10) and ((isfloat(m1) and isfloat(m2) and isfloat(v1i) and isfloat(v1f) and isfloat(v2i) and isfloat(v2f)) == False):
+                o +=1
+                try:
+                    m1 = (float(m2)*(float(v2f)-float(v2i)))/(float(v1i)-float(v1f))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    m2 = (float(m1)*(float(v1f)-float(v1i)))/(float(v2i)-float(v2f))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o +=1
+                try:
+                    v1i = float(v1f) + (float(m2)*float(v2f))/(float(m1)) - (float(m2)*float(v2i))/(float(m1))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o += 1
+                try:
+                    v1f = float(v1i) + (float(m2)*float(v2i))/(float(m1)) - (float(m2)*float(v2f))/(float(m1))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o += 1
+                try:
+                    v1i = float(v2f) + (float(m1)*float(v1f))/(float(m2)) - (float(m1)*float(v1i))/(float(m2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o += 1
+                try:
+                    v2f = float(v2i) + (float(m1)*float(v1i))/(float(m2)) - (float(m1)*float(v1f))/(float(m2))
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o = 0
+                print(f"""
+                  Loop {i+1} Completed. Results:
+                        Mass 1 = {m1}
+                        Mass 2 = {m1}
+                        Inital Velocity 1 = {v1i}
+                        Final Velocity 1 = {v1f} 
+                        Inital Velocity 2 = {v2i}
+                        Final Velocity = {v2f}
+                  """)
+                i += 1
+            col()
+            
+        elif ((clCmd == "/quit") or (clCmd == "/q")):
+            sys.exit("User Terminated the Program")
+        elif (clCmd == "/exit") or (clCmd) == "/e":
+            console()
+        else:
+            print("ERROR: INVALID COMMAND")
+            
+            col()
 
 
     ###################
@@ -1181,6 +1379,9 @@ def console():
     elif cmd == "/impulse":
         AxBisC("Impulse/Change in Momentum", "Force", "Time") 
     ##############
+    elif cmd == "/col":
+        col()
+    ##############
     elif cmd == "/changelog" :
         print(""" 
               2.0.0 - added projectile calculations
@@ -1217,6 +1418,8 @@ def console():
               4.4.2 - formating 2: electric bogaloo
               5.0.0 - added vector calculator
               5.0.1 - vector scalar bug fixes 
+              6.0.0 - added collison calculator
+              6.0.1 - inelastic collison bug fixed
               """)
         console()
     ##############
