@@ -782,7 +782,7 @@ def console():
                 print(f"""
                   Loop {i+1} Completed. Results:
                         Mass 1 = {m1}
-                        Mass 2 = {m1}
+                        Mass 2 = {m2}
                         Inital Velocity = {vi}
                         Final Velocity = {vf} 
                   """)
@@ -839,7 +839,7 @@ def console():
                 print(f"""
                   Loop {i+1} Completed. Results:
                         Mass 1 = {m1}
-                        Mass 2 = {m1}
+                        Mass 2 = {m2}
                         Velocity 1 = {v1}
                         Velocity 2 = {v2}
                         Final Velocity = {vf} 
@@ -1075,7 +1075,7 @@ def console():
             ### xf =  xi + vi*t+1/2a*t^2
             o +=1
             try:
-                xf = float(xi)+float(vi)*float(t)+0.5*(float(a))*math.pow(float(t), 2)
+                xf = float(xi)+(float(vi)*float(t))+0.5*(float(a))*math.pow(float(t), 2)
                 statusSuccess()
             except:
                 statusFail()
@@ -1133,7 +1133,7 @@ def console():
                 pass
             o +=1
             try:
-                xf = (math.pow(float(vf), 2))/(2*float(a))-(math.pow(float(vi), 2))/(2*float(a))+float(xi)
+                xf = ((math.pow(float(vf), 2))/(2*float(a))) - ((math.pow(float(vi),2))/(2*float(a))) + float(xi)
                 statusSuccess()
             except:
                 statusFail()
@@ -1438,6 +1438,8 @@ def console():
               6.0.1 - inelastic collison bug fixed
               6.1.0 - added equation to elastic collision solver, added 
                         /col to help
+              6.1.2 - fixed display bug with /col, fixed a bug with /posT where xf would be
+                        calculated wrongly
               """)
         console()
     ##############
