@@ -882,6 +882,13 @@ def console():
                     pass
                 o += 1
                 try:
+                    v1f = ((float(m1)-float(m2))/(float(m1)+float(m2)))*float(v1i)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                o += 1
+                try:
                     v1f = float(v1i) + (float(m2)*float(v2i))/(float(m1)) - (float(m2)*float(v2f))/(float(m1))
                     statusSuccess()
                 except:
@@ -901,11 +908,19 @@ def console():
                 except:
                     statusFail()
                     pass
+                o += 1
+                try:
+                    v2f = ((2*float(m1))/(float(m1)+float(m2)))*float(v1i)
+                    statusSuccess()
+                except:
+                    statusFail()
+                    pass
+                
                 o = 0
                 print(f"""
                   Loop {i+1} Completed. Results:
                         Mass 1 = {m1}
-                        Mass 2 = {m1}
+                        Mass 2 = {m2}
                         Inital Velocity 1 = {v1i}
                         Final Velocity 1 = {v1f} 
                         Inital Velocity 2 = {v2i}
@@ -942,7 +957,8 @@ def console():
                   /power - power equations
                   /momentum - momentum equations
                   /impulse - impulse equations
-                  /vec - vector calculator 
+                  /vec - vector calculator
+                  /col - collision calculator 
                   
                   /status - display operation success readout
                   /faq - displays frequently ask questions
@@ -1382,10 +1398,10 @@ def console():
     elif cmd == "/col":
         col()
     ##############
-    elif cmd == "/changelog" :
+    elif cmd == "/changelog" :                                                                              ### ?/?/? ###
         print(""" 
               2.0.0 - added projectile calculations
-              2.1.0-2.6.0 - I forgor, mostly just bug fixes and added more
+              2.1.0 - 2.6.0 - I forgor, mostly just bug fixes and added more
                               stuff to the projectile calculator, optimization
               2.7.0 - fixed some bugs that arose from the stupid math module not having 
                       trig functions besides sin, cos, and tan
@@ -1420,6 +1436,8 @@ def console():
               5.0.1 - vector scalar bug fixes 
               6.0.0 - added collison calculator
               6.0.1 - inelastic collison bug fixed
+              6.1.0 - added equation to elastic collision solver, added 
+                        /col to help
               """)
         console()
     ##############
