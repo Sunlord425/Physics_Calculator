@@ -958,7 +958,17 @@ def console():
                   /momentum - momentum equations
                   /impulse - impulse equations
                   /vec - vector calculator
-                  /col - collision calculator 
+                  /col - collision calculator
+                  /AvAV - Average Angular Velocity
+                  /AvAA - Average Angular Acceleration
+                  /MoI - Moment of Inertia
+                  /TanSpeed -  Tangential Speed
+                  /TanTorque - Tangential Torque
+                  /NonTanTorque - Non-Tangential Torque
+                  /sumTor - Sum of All Torques
+                  /RotKE - Rotational Kinetic Energy
+                  /AM - Angular Momentum
+
                   
                   /status - display operation success readout
                   /faq - displays frequently ask questions
@@ -1266,6 +1276,153 @@ def console():
             i += 1
         console() 
     ##############
+    elif cmd == "/AvAV":
+        AxBisC("Change in Angular Position","Average Angular Velocity", "Change in Time")
+    ############
+    elif cmd == "/TanSpeed":
+        AxBisC("Tangential Speed", "Radius", "Angular Speed")
+    ###########
+    elif cmd == "/AvAA":
+        AxBisC("Change in Angular Velocity", "Change in Time", "Average Angular Acceleration")
+    ###########
+    elif cmd == "/MoI":
+        print("please enter values below, entering \"null\" if it is not given")
+        print()
+        iner = input("Moment of Inertia: ")
+        m = input("Mass:  ")
+        r = input("Radius: ")
+        o = 0
+        i = o
+        while (i < 10) and ((isfloat(iner) and isfloat(m) and isfloat(r)) == False): 
+            o +=1
+            try:
+               iner = float(m)*math.pow(float(r),2)
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               m = (float(iner))/math.pow(float(r),2)
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               r = math.sqrt(float(iner)*float(m))/float(m)
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o = 0
+            print(f"""
+                  Loop {i+1} Completed. Results:
+                        Moment of Inertia: {iner}
+                        Mass: {m}
+                        Radius: {r}
+                  """)
+            i += 1
+        console()
+    ###########
+    elif cmd == "/TanTorque":
+        AxBisC("Torque","Radius","Force")
+    ###########
+    elif cmd == "/NonTanTorque":
+        print("please enter values below, entering \"null\" if it is not given")
+        print()
+        t = input("Torque: ")
+        r = input("Radius: ")
+        f = input("Force:  ")
+        a = input("Angle: ")
+        o = 0
+        i = o
+        while (i < 10) and ((isfloat(t) and isfloat(r) and isfloat(f) and isfloat(a)) == False): 
+            o +=1
+            try:
+               t = float(r)*float(f)*math.sin(math.radians(float(a)))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               r = (float(t)*csc(float(a)))/(float(f))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               f = (float(t)*csc(float(a)))/(float(r))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               a = math.asin(math.radians((float(t))/(float(r)*float(f))))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o = 0
+            print(f"""
+                  Loop {i+1} Completed. Results:
+                        Torque: {t}
+                        Radius: {r}
+                        Force: {f}
+                        Angle: {a}
+                  """)
+            i += 1
+        console()
+    ###########
+    elif cmd == "/RotKE":
+        print("please enter values below, entering \"null\" if it is not given")
+        print()
+        rKE = input("Rotational Kinetic Energy: ")
+        m = input("Moment of Inertia:  ")
+        a = input("Angular Speed: ")
+        o = 0
+        i = o
+        while (i < 10) and ((isfloat(rKE) and isfloat(m) and isfloat(a)) == False): 
+            o +=1
+            try:
+               rKE = 0.5*float(m)*math.pow(float(a),2)
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               m = (2*float(rKE))/math.pow(float(a),2)
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               a = (math.sqrt(2*float(rKE)*float(m)))/(float(m))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o = 0
+            print(f"""
+                  Loop {i+1} Completed. Results:
+                        Rotational Kinetic Energy: {rKE}
+                        Moment of Inertia: {m}
+                        Angular Speed: {a}
+                  """)
+            i += 1
+        console()
+    ###########
+    elif cmd == "/AM":
+        AxBisC("Angular Momentum","Moment of Inertia", "Angular Speed")
+    ###########
+    elif cmd == "/sumTor":
+        AxBisC("Sum of All Torques","Moment of Inertia","Angular Acceleration")
+    ###########
     elif cmd == "/potentialGE":
         print("please enter values below, entering \"null\" if it is not given")
         print()
@@ -1440,6 +1597,7 @@ def console():
                         /col to help
               6.1.2 - fixed display bug with /col, fixed a bug with /posT where xf would be
                         calculated wrongly
+              7.0.0 - added a bunch of rotational equations
               """)
         console()
     ##############
