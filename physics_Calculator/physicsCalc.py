@@ -8,7 +8,7 @@ Created on Mon Nov 14 21:41:33 2022
 """
 import math
 import sys
-version = "6.0.1" 
+version = "7.0.0" 
 g = 9.81
 pi = 3.14159265359
 displayStatus = True
