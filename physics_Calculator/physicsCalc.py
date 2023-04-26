@@ -4,12 +4,13 @@
 Created on Mon Nov 14 21:41:33 2022
 
 @author: lorenzomazzeo
-@last updated: 2/13/23
+@last updated: 4/18/23
 """
 import math
 import sys
-version = "7.0.0" 
+version = "7.1.0" 
 g = 9.81
+gC = 6.67*math.pow(10,-11)
 pi = 3.14159265359
 displayStatus = True
 def csc(theta):
@@ -959,6 +960,7 @@ def console():
                   /impulse - impulse equations
                   /vec - vector calculator
                   /col - collision calculator
+                  /tor - Torque
                   /AvAV - Average Angular Velocity
                   /AvAA - Average Angular Acceleration
                   /MoI - Moment of Inertia
@@ -968,6 +970,7 @@ def console():
                   /sumTor - Sum of All Torques
                   /RotKE - Rotational Kinetic Energy
                   /AM - Angular Momentum
+                  /gravity - gravitational force equations
 
                   
                   /status - display operation success readout
@@ -1276,6 +1279,9 @@ def console():
             i += 1
         console() 
     ##############
+    elif cmd == "/tor":
+        AxBisC("Torque","Radius","Force")
+    ##############
     elif cmd == "/AvAV":
         AxBisC("Change in Angular Position","Average Angular Velocity", "Change in Time")
     ############
@@ -1555,6 +1561,54 @@ def console():
     elif cmd == "/col":
         col()
     ##############
+    elif cmd == "/gravity":
+        print("please enter values below, entering \"null\" if it is not given")
+        print()
+        f = input("Force: ")
+        d = input("Distance: ")
+        m1 = input("Mass 1: ")
+        m2 = input("Mass 2:  ")
+        o = 0
+        i = o
+        while (i < 10) and ((isfloat(d) and isfloat(f) and isfloat(m1) and isfloat(m2)) == False): 
+            o +=1
+            try:
+               f = gC*((float(m1)*float(m2))/math.pow(float(d), 2))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               d = (math.sqrt(gC*float(m1)*float(m2)*float(f)))/(float(f))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               m1 = (float(f)*math.pow(float(d),2))/(gC*float(m2))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o +=1
+            try:
+               m2 = (float(f)*math.pow(float(d),2))/(gC*float(m1))
+               statusSuccess()
+            except:
+               statusFail()
+               pass
+            o = 0
+            print(f"""
+                  Loop {i+1} Completed. Results:
+                      Force: {f}
+                      Distance: {d}
+                      Mass 1: {m1}
+                      Mass 2: {m2}
+                  """)
+            console()
+    ##############
     elif cmd == "/changelog" :                                                                              ### ?/?/? ###
         print(""" 
               2.0.0 - added projectile calculations
@@ -1598,6 +1652,7 @@ def console():
               6.1.2 - fixed display bug with /col, fixed a bug with /posT where xf would be
                         calculated wrongly
               7.0.0 - added a bunch of rotational equations
+              7.1.0 - added gravitational force equations
               """)
         console()
     ##############
